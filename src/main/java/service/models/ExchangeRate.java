@@ -1,10 +1,15 @@
 package service.models;
 
-import lombok.Value;
+import lombok.Data;
 
-import java.math.BigDecimal;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.time.Instant;
 
-@Value
+@Data
+@Entity
 public class ExchangeRate {
-    private BigDecimal value;
+    @Id
+    private Instant timestamp;
+    private double value;
 }
