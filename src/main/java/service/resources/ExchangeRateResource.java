@@ -6,14 +6,14 @@ import org.springframework.hateoas.ResourceSupport;
 import service.models.ExchangeRate;
 
 @Getter
-public class ExchangeRateResource  extends ResourceSupport {
+public class ExchangeRateResource extends ResourceSupport {
     @JsonUnwrapped
-    private final ExchangeRate accomplishment;
+    private final ExchangeRate exchangeRate;
 
-    public ExchangeRateResource(ExchangeRate accomplishment) {
-        this.accomplishment = accomplishment;
+    public ExchangeRateResource(ExchangeRate exchangeRate) {
+        this.exchangeRate = exchangeRate;
 
-//        add(ControllerLinkBuilder.linkTo(methodOn(AccomplishmentController.class).get(accomplishment.getId())).withSelfRel());
-//        add(ControllerLinkBuilder.linkTo(methodOn(ProfileController.class).get(accomplishment.getProfileId())).withRel("profile"));
+//        add(ControllerLinkBuilder.linkTo(methodOn(AccomplishmentController.class).get(exchangeRate.getId())).withSelfRel());
+//        add(ControllerLinkBuilder.linkTo(methodOn(ProfileController.class).get(exchangeRate.getProfileId())).withRel("profile"));
     }
 }
