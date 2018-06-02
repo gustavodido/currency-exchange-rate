@@ -21,6 +21,8 @@ repositories {
 }
 
 dependencies {
+    compileOnly "org.projectlombok:lombok:1.16.16"
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
