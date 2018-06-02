@@ -16,5 +16,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: false
-endpoints:
-  sensitive: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: threaddump, env, configprops
