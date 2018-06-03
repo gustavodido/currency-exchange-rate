@@ -10,7 +10,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import service.domain.models.ExchangeRate;
 import service.domain.models.ExchangeRateResource;
-import service.domain.queries.GetExchangeRateByIdQuery;
+import service.domain.queries.GetExchangeRateByTimestampQuery;
 import service.domain.queries.GetExchangeRatesByDateRangeQuery;
 import service.domain.queries.GetLatestExchangeRateQuery;
 
@@ -27,7 +27,7 @@ import static service.support.Stubs.rates;
 @RunWith(MockitoJUnitRunner.class)
 public class ExchangeRateControllerTest {
     @Mock
-    private GetExchangeRateByIdQuery getExchangeRateByIdQuery;
+    private GetExchangeRateByTimestampQuery getExchangeRateByIdQuery;
 
     @Mock
     private GetLatestExchangeRateQuery getLatestExchangeRateQuery;

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import service.domain.models.ExchangeRateResource;
-import service.domain.queries.GetExchangeRateByIdQuery;
+import service.domain.queries.GetExchangeRateByTimestampQuery;
 import service.domain.queries.GetExchangeRatesByDateRangeQuery;
 import service.domain.queries.GetLatestExchangeRateQuery;
 
@@ -16,11 +16,11 @@ import static service.domain.models.ExchangeRateResource.embedAsResources;
 
 @RestController("/api/rate")
 public class ExchangeRateController {
-    private final GetExchangeRateByIdQuery getExchangeRateByIdQuery;
+    private final GetExchangeRateByTimestampQuery getExchangeRateByIdQuery;
     private final GetLatestExchangeRateQuery getLatestExchangeRateQuery;
     private final GetExchangeRatesByDateRangeQuery getExchangeRatesByDateRangeQuery;
 
-    public ExchangeRateController(GetExchangeRateByIdQuery getExchangeRateByIdQuery, GetLatestExchangeRateQuery getLatestExchangeRateQuery, GetExchangeRatesByDateRangeQuery getExchangeRatesByDateRangeQuery) {
+    public ExchangeRateController(GetExchangeRateByTimestampQuery getExchangeRateByIdQuery, GetLatestExchangeRateQuery getLatestExchangeRateQuery, GetExchangeRatesByDateRangeQuery getExchangeRatesByDateRangeQuery) {
         this.getExchangeRateByIdQuery = getExchangeRateByIdQuery;
         this.getLatestExchangeRateQuery = getLatestExchangeRateQuery;
         this.getExchangeRatesByDateRangeQuery = getExchangeRatesByDateRangeQuery;
