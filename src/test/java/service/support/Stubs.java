@@ -1,6 +1,6 @@
 package service.support;
 
-import service.models.ExchangeRate;
+import service.domain.models.ExchangeRate;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,4 +1,4 @@
-package service.models;
+package service.domain.models;
 
 import lombok.Builder;
 import lombok.Data;

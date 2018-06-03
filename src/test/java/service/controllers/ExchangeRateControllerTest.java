@@ -8,11 +8,11 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import service.models.ExchangeRate;
-import service.models.ExchangeRateResource;
-import service.queries.GetExchangeRateByIdQuery;
-import service.queries.GetExchangeRatesByDateRangeQuery;
-import service.queries.GetLatestExchangeRateQuery;
+import service.domain.models.ExchangeRate;
+import service.domain.models.ExchangeRateResource;
+import service.domain.queries.GetExchangeRateByIdQuery;
+import service.domain.queries.GetExchangeRatesByDateRangeQuery;
+import service.domain.queries.GetLatestExchangeRateQuery;
 
 import java.util.List;
 

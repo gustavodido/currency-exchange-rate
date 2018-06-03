@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import service.models.ExchangeRateResource;
-import service.queries.GetExchangeRateByIdQuery;
-import service.queries.GetExchangeRatesByDateRangeQuery;
-import service.queries.GetLatestExchangeRateQuery;
+import service.domain.models.ExchangeRateResource;
+import service.domain.queries.GetExchangeRateByIdQuery;
+import service.domain.queries.GetExchangeRatesByDateRangeQuery;
+import service.domain.queries.GetLatestExchangeRateQuery;
 
 import java.time.Instant;
 
-import static service.models.ExchangeRateResource.embedAsResources;
+import static service.domain.models.ExchangeRateResource.embedAsResources;
 
 @RestController("/api/rate")
 public class ExchangeRateController {

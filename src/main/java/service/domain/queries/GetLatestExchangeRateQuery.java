@@ -1,7 +1,9 @@
-package service.queries;
+package service.domain.queries;
 
-import service.models.ExchangeRate;
+import service.domain.models.ExchangeRate;
+import service.infrastructure.annotations.Query;
 
+@Query
 public class GetLatestExchangeRateQuery {
     public ExchangeRate run() {
         return ExchangeRate.builder().build();

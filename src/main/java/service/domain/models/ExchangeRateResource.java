@@ -1,4 +1,4 @@
-package service.models;
+package service.domain.models;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import lombok.Getter;
