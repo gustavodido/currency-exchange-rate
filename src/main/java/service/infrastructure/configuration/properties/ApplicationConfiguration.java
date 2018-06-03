@@ -11,4 +11,5 @@ import org.springframework.context.annotation.Configuration;
 @Data
 public class ApplicationConfiguration {
     private final UrlsConfiguration urls = new UrlsConfiguration();
+    private final SchedulingConfiguration scheduling = new SchedulingConfiguration();
 }
