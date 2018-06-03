@@ -3,6 +3,7 @@ package service.controllers;
 import org.springframework.hateoas.Resources;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import service.domain.models.ExchangeRateResource;
@@ -14,7 +15,8 @@ import java.time.Instant;
 
 import static service.domain.models.ExchangeRateResource.embedAsResources;
 
-@RestController("/api/rate")
+@RestController
+@RequestMapping(value = "/api/rates", produces = "application/hal+json")
 public class ExchangeRateController {
     private final GetExchangeRateByTimestampQuery getExchangeRateByIdQuery;
     private final GetLatestExchangeRateQuery getLatestExchangeRateQuery;
