@@ -1,5 +1,6 @@
 package service.support;
 
+import service.domain.models.ConverterApiQueryDto;
 import service.domain.models.ExchangeRate;
 
 import java.time.LocalDateTime;
@@ -25,5 +26,11 @@ public class Stubs {
 
     public static List<ExchangeRate> rates() {
         return asList(oldRate(), latestRate());
+    }
+
+    public static ConverterApiQueryDto latestRateDto() {
+        return ConverterApiQueryDto.builder()
+                .value(latestRate().getValue())
+                .build();
     }
 }
