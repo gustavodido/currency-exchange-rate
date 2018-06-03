@@ -6,14 +6,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import service.domain.models.ExchangeRateResource;
 import service.domain.queries.GetExchangeRateByTimestampQuery;
 import service.domain.queries.GetExchangeRatesByDateRangeQuery;
 import service.domain.queries.GetLatestExchangeRateQuery;
 
 import java.time.Instant;
 
-import static service.domain.models.ExchangeRateResource.embedAsResources;
+import static service.controllers.ExchangeRateResource.embedAsResources;
 import static service.infrastructure.configuration.Constants.APPLICATION_HAL_JSON;
 
 @RestController

@@ -9,7 +9,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import service.domain.models.ExchangeRate;
-import service.domain.models.ExchangeRateResource;
 import service.domain.queries.GetExchangeRateByTimestampQuery;
 import service.domain.queries.GetExchangeRatesByDateRangeQuery;
 import service.domain.queries.GetLatestExchangeRateQuery;

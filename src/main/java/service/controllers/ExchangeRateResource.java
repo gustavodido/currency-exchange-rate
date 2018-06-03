@@ -1,10 +1,10 @@
-package service.domain.models;
+package service.controllers;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import lombok.Getter;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.Resources;
-import service.controllers.ExchangeRateController;
+import service.domain.models.ExchangeRate;
 
 import java.time.Instant;
 import java.util.List;
@@ -14,17 +14,17 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @Getter
-public class ExchangeRateResource extends ResourceSupport {
+class ExchangeRateResource extends ResourceSupport {
     @JsonUnwrapped
     private final ExchangeRate exchangeRate;
 
-    public ExchangeRateResource(ExchangeRate exchangeRate) {
+    ExchangeRateResource(ExchangeRate exchangeRate) {
         this.exchangeRate = exchangeRate;
 
         add(linkTo(methodOn(ExchangeRateController.class).get(exchangeRate.getTimestamp())).withSelfRel());
     }
 
-    public static Resources<ExchangeRateResource> embedAsResources(List<ExchangeRate> exchangeRates, Instant from, Instant to) {
+    static Resources<ExchangeRateResource> embedAsResources(List<ExchangeRate> exchangeRates, Instant from, Instant to) {
         List<ExchangeRateResource> resources = exchangeRates
                 .stream()
                 .map(ExchangeRateResource::new)
