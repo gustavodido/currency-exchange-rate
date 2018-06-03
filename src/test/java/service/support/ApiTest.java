@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static java.util.TimeZone.getTimeZone;
 import static java.util.TimeZone.setDefault;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
+import static service.infrastructure.configuration.Constants.DEFAULT_TIMEZONE;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -20,7 +21,7 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TE
 @Sql(executionPhase = BEFORE_TEST_METHOD, scripts = "classpath:data.sql")
 public abstract class ApiTest {
     protected ApiTest() {
-        setDefault(getTimeZone("UTC"));
+        setDefault(getTimeZone(DEFAULT_TIMEZONE));
     }
 
     @Autowired

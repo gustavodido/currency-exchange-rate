@@ -14,9 +14,10 @@ import service.domain.queries.GetLatestExchangeRateQuery;
 import java.time.Instant;
 
 import static service.domain.models.ExchangeRateResource.embedAsResources;
+import static service.infrastructure.configuration.Constants.APPLICATION_HAL_JSON;
 
 @RestController
-@RequestMapping(value = "/api/rates", produces = "application/hal+json")
+@RequestMapping(value = "/api/rates", produces = APPLICATION_HAL_JSON)
 public class ExchangeRateController {
     private final GetExchangeRateByTimestampQuery getExchangeRateByIdQuery;
     private final GetLatestExchangeRateQuery getLatestExchangeRateQuery;
