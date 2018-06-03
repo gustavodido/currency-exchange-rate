@@ -5,32 +5,39 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import service.models.ExchangeRate;
-import service.resources.ExchangeRateResource;
+import service.models.ExchangeRateResource;
+import service.queries.GetExchangeRateByIdQuery;
+import service.queries.GetExchangeRatesByDateRangeQuery;
+import service.queries.GetLatestExchangeRateQuery;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.time.Instant;
 
-import static java.util.Arrays.asList;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+import static service.models.ExchangeRateResource.embedAsResources;
 
 @RestController("/api/rate")
 public class ExchangeRateController {
+    private final GetExchangeRateByIdQuery getExchangeRateByIdQuery;
+    private final GetLatestExchangeRateQuery getLatestExchangeRateQuery;
+    private final GetExchangeRatesByDateRangeQuery getExchangeRatesByDateRangeQuery;
+
+    public ExchangeRateController(GetExchangeRateByIdQuery getExchangeRateByIdQuery, GetLatestExchangeRateQuery getLatestExchangeRateQuery, GetExchangeRatesByDateRangeQuery getExchangeRatesByDateRangeQuery) {
+        this.getExchangeRateByIdQuery = getExchangeRateByIdQuery;
+        this.getLatestExchangeRateQuery = getLatestExchangeRateQuery;
+        this.getExchangeRatesByDateRangeQuery = getExchangeRatesByDateRangeQuery;
+    }
 
     @GetMapping("/{id}")
-    public ExchangeRateResource get(@PathVariable LocalDateTime id) {
-        return new ExchangeRateResource(new ExchangeRate());
+    public ExchangeRateResource get(@PathVariable Instant id) {
+        return new ExchangeRateResource(getExchangeRateByIdQuery.run(id));
     }
 
     @GetMapping("/latest")
     public ExchangeRateResource latest() {
-        return new ExchangeRateResource(new ExchangeRate());
+        return new ExchangeRateResource(getLatestExchangeRateQuery.run());
     }
 
     @GetMapping("/history")
-    public Resources<ExchangeRateResource> history(@RequestParam LocalDateTime from, @RequestParam LocalDateTime to) {
-        List<ExchangeRateResource> models = asList(latest(), latest());
-        return new Resources<>(models, linkTo(methodOn(ExchangeRateController.class).history(from, to)).withRel("self"));
+    public Resources<ExchangeRateResource> history(@RequestParam Instant from, @RequestParam Instant to) {
+        return embedAsResources(getExchangeRatesByDateRangeQuery.run(from, to), from, to);
     }
 }
