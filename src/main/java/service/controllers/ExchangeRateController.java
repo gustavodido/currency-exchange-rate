@@ -28,8 +28,7 @@ public class ExchangeRateController {
         this.getLatestExchangeRateQuery = getLatestExchangeRateQuery;
         this.getExchangeRatesByDateRangeQuery = getExchangeRatesByDateRangeQuery;
     }
-
-    @GetMapping("/{id}")
+   @GetMapping("/{id}")
     public ExchangeRateResource get(@PathVariable Instant id) {
         return new ExchangeRateResource(getExchangeRateByIdQuery.run(id));
     }
