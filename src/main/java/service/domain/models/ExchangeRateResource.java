@@ -21,8 +21,7 @@ public class ExchangeRateResource extends ResourceSupport {
     public ExchangeRateResource(ExchangeRate exchangeRate) {
         this.exchangeRate = exchangeRate;
 
-//        add(ControllerLinkBuilder.linkTo(methodOn(AccomplishmentController.class).get(exchangeRate.getId())).withSelfRel());
-//        add(ControllerLinkBuilder.linkTo(methodOn(ProfileController.class).get(exchangeRate.getProfileId())).withRel("profile"));
+        add(linkTo(methodOn(ExchangeRateController.class).get(exchangeRate.getTimestamp())).withSelfRel());
     }
 
     public static Resources<ExchangeRateResource> embedAsResources(List<ExchangeRate> exchangeRates, Instant from, Instant to) {
@@ -31,6 +30,7 @@ public class ExchangeRateResource extends ResourceSupport {
                 .map(ExchangeRateResource::new)
                 .collect(toList());
 
-        return new Resources<>(resources, linkTo(methodOn(ExchangeRateController.class).history(from, to)).withRel("self"));
+        return new Resources<>(resources, linkTo(methodOn(ExchangeRateController.class).history(from, to))
+                .withRel("history"));
     }
 }

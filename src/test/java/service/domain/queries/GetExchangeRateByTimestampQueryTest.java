@@ -13,7 +13,7 @@ import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
-import static service.support.Stubs.currentRate;
+import static service.support.Stubs.oldRate;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GetExchangeRateByTimestampQueryTest {
@@ -25,20 +25,20 @@ public class GetExchangeRateByTimestampQueryTest {
 
     @Test
     public void shouldGetRateByTimestamp() {
-        when(exchangeRateRepository.findById(currentRate().getTimestamp()))
-                .thenReturn(of(currentRate()));
+        when(exchangeRateRepository.findById(oldRate().getTimestamp()))
+                .thenReturn(of(oldRate()));
 
-        ExchangeRate actualRate = getExchangeRateByTimestampQuery.run(currentRate().getTimestamp());
+        ExchangeRate actualRate = getExchangeRateByTimestampQuery.run(oldRate().getTimestamp());
 
-        assertThat(actualRate).isEqualTo(currentRate());
+        assertThat(actualRate).isEqualTo(oldRate());
 
     }
 
     @Test(expected = ExchangeRateNotFoundException.class)
     public void shouldThrowExceptionIfRateDoesNotExist() {
-        when(exchangeRateRepository.findById(currentRate().getTimestamp()))
+        when(exchangeRateRepository.findById(oldRate().getTimestamp()))
                 .thenReturn(empty());
 
-        getExchangeRateByTimestampQuery.run(currentRate().getTimestamp());
+        getExchangeRateByTimestampQuery.run(oldRate().getTimestamp());
     }
 }

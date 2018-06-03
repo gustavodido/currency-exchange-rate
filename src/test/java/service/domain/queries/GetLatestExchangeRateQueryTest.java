@@ -13,7 +13,7 @@ import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
-import static service.support.Stubs.currentRate;
+import static service.support.Stubs.oldRate;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GetLatestExchangeRateQueryTest {
@@ -26,11 +26,11 @@ public class GetLatestExchangeRateQueryTest {
     @Test
     public void shouldGetLatestRate() {
         when(exchangeRateRepository.findFirstByOrderByTimestampDesc())
-                .thenReturn(of(currentRate()));
+                .thenReturn(of(oldRate()));
 
         ExchangeRate actualRate = getLatestExchangeRateQuery.run();
 
-        assertThat(actualRate).isEqualTo(currentRate());
+        assertThat(actualRate).isEqualTo(oldRate());
 
     }
 

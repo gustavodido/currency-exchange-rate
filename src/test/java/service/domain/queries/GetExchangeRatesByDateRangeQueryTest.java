@@ -12,8 +12,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
-import static service.support.Stubs.currentRate;
-import static service.support.Stubs.previousRate;
+import static service.support.Stubs.oldRate;
+import static service.support.Stubs.latestRate;
 import static service.support.Stubs.rates;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -26,11 +26,11 @@ public class GetExchangeRatesByDateRangeQueryTest {
 
     @Test
     public void shouldGetExchangeRatesByTimestampRange() {
-        when(exchangeRateRepository.findByTimestampBetween(previousRate().getTimestamp(), currentRate().getTimestamp()))
+        when(exchangeRateRepository.findByTimestampBetween(latestRate().getTimestamp(), oldRate().getTimestamp()))
                 .thenReturn(rates());
 
         List<ExchangeRate> actualRates =
-                getExchangeRatesByDateRangeQuery.run(previousRate().getTimestamp(), currentRate().getTimestamp());
+                getExchangeRatesByDateRangeQuery.run(latestRate().getTimestamp(), oldRate().getTimestamp());
 
         assertThat(actualRates).isEqualTo(rates());
     }

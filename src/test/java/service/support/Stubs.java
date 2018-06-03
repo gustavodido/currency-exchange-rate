@@ -9,21 +9,21 @@ import static java.time.ZoneOffset.UTC;
 import static java.util.Arrays.asList;
 
 public class Stubs {
-    public static ExchangeRate currentRate() {
+    public static ExchangeRate oldRate() {
         return ExchangeRate.builder()
-                .value(1.0d)
-                .timestamp(LocalDateTime.of(2018, 6, 2, 1, 0).toInstant(UTC))
+                .value(1.12345)
+                .timestamp(LocalDateTime.of(2018, 6, 1, 1, 1, 1).toInstant(UTC))
                 .build();
     }
 
-    public static ExchangeRate previousRate() {
+    public static ExchangeRate latestRate() {
         return ExchangeRate.builder()
-                .value(2.0d)
-                .timestamp(LocalDateTime.of(2018, 6, 1, 1, 0).toInstant(UTC))
+                .value(2.65431)
+                .timestamp(LocalDateTime.of(2018, 6, 2, 2, 2, 2).toInstant(UTC))
                 .build();
     }
 
     public static List<ExchangeRate> rates() {
-        return asList(currentRate(), previousRate());
+        return asList(oldRate(), latestRate());
     }
 }

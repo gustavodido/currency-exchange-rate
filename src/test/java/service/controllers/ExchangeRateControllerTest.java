@@ -20,8 +20,8 @@ import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.web.context.request.RequestContextHolder.setRequestAttributes;
-import static service.support.Stubs.currentRate;
-import static service.support.Stubs.previousRate;
+import static service.support.Stubs.oldRate;
+import static service.support.Stubs.latestRate;
 import static service.support.Stubs.rates;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -45,31 +45,31 @@ public class ExchangeRateControllerTest {
 
     @Test
     public void shouldReturnExchangeRateById() {
-        when(getExchangeRateByIdQuery.run(currentRate().getTimestamp())).thenReturn(currentRate());
+        when(getExchangeRateByIdQuery.run(oldRate().getTimestamp())).thenReturn(oldRate());
 
-        ExchangeRate actualRate = exchangeRateController.get(currentRate().getTimestamp())
+        ExchangeRate actualRate = exchangeRateController.get(oldRate().getTimestamp())
                 .getExchangeRate();
 
-        assertThat(actualRate).isEqualTo(currentRate());
+        assertThat(actualRate).isEqualTo(oldRate());
     }
 
     @Test
     public void shouldReturnLatestExchangeRate() {
-        when(getLatestExchangeRateQuery.run()).thenReturn(currentRate());
+        when(getLatestExchangeRateQuery.run()).thenReturn(oldRate());
 
         ExchangeRate actualRate = exchangeRateController.latest()
                 .getExchangeRate();
 
-        assertThat(actualRate).isEqualTo(currentRate());
+        assertThat(actualRate).isEqualTo(oldRate());
     }
 
     @Test
     public void shouldReturnExchangeRateByDateRange() {
-        when(getExchangeRatesByDateRangeQuery.run(currentRate().getTimestamp(), previousRate().getTimestamp()))
+        when(getExchangeRatesByDateRangeQuery.run(oldRate().getTimestamp(), latestRate().getTimestamp()))
                 .thenReturn(rates());
 
         List<ExchangeRate> actualRates =
-                exchangeRateController.history(currentRate().getTimestamp(), previousRate().getTimestamp())
+                exchangeRateController.history(oldRate().getTimestamp(), latestRate().getTimestamp())
                         .getContent()
                         .stream()
                         .map(ExchangeRateResource::getExchangeRate)
