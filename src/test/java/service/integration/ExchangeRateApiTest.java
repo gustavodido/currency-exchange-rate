@@ -1,7 +1,7 @@
-package service.api;
+package service.integration;
 
 import org.junit.Test;
-import service.support.ApiTest;
+import service.support.IntegrationTest;
 
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.core.Is.is;
@@ -12,7 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static service.support.Stubs.latestRate;
 import static service.support.Stubs.oldRate;
 
-public class ExchangeRateApiTest extends ApiTest {
+public class ExchangeRateApiTest extends IntegrationTest {
     @Test
     public void shouldGetExchangeRateByTimestamp() throws Exception {
         this.mockMvc.perform(get("/api/rates/" + oldRate().getTimestamp()))

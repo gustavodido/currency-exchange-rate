@@ -19,8 +19,8 @@ import static service.infrastructure.configuration.Constants.DEFAULT_TIMEZONE;
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @Sql(executionPhase = BEFORE_TEST_METHOD, scripts = "classpath:data.sql")
-public abstract class ApiTest {
-    protected ApiTest() {
+public abstract class IntegrationTest {
+    protected IntegrationTest() {
         setDefault(getTimeZone(DEFAULT_TIMEZONE));
     }
 

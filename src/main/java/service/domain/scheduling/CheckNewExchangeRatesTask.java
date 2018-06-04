@@ -24,7 +24,7 @@ public class CheckNewExchangeRatesTask {
     }
 
     @Scheduled(fixedRateString = "${application.scheduling.interval}")
-    public void run() {
+    public NewExchangeRateEvent run() {
         ConverterApiQueryDto rateDto = getRateFromCurrencyConverterApiQuery.run();
 
         ExchangeRate exchangeRate = ExchangeRate.builder()
@@ -32,8 +32,12 @@ public class CheckNewExchangeRatesTask {
                 .value(rateDto.getValue())
                 .build();
 
-        publisher.publishEvent(NewExchangeRateEvent.builder()
+        NewExchangeRateEvent newExchangeRateEvent = NewExchangeRateEvent.builder()
                 .exchangeRate(exchangeRate)
-                .build());
+                .build();
+
+        publisher.publishEvent(newExchangeRateEvent);
+
+        return newExchangeRateEvent;
     }
 }
