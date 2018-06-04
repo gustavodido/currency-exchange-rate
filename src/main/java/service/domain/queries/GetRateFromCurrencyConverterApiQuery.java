@@ -5,7 +5,7 @@ import org.springframework.web.client.RestTemplate;
 import service.domain.exceptions.CurrencyConverterApiUnavailableException;
 import service.domain.models.ConverterApiQueryDto;
 import service.infrastructure.annotations.Query;
-import service.infrastructure.configuration.properties.ApplicationConfiguration;
+import service.infrastructure.configuration.ApplicationConfiguration;
 
 @Query
 public class GetRateFromCurrencyConverterApiQuery {

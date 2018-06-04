@@ -11,8 +11,8 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import service.domain.exceptions.CurrencyConverterApiUnavailableException;
 import service.domain.models.ConverterApiQueryDto;
-import service.infrastructure.configuration.properties.ApplicationConfiguration;
-import service.infrastructure.configuration.properties.UrlsConfiguration;
+import service.infrastructure.configuration.ApplicationConfiguration;
+import service.infrastructure.configuration.ApplicationConfiguration.UrlsConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
