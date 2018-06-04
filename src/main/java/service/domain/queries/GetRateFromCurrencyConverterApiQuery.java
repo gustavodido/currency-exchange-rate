@@ -1,6 +1,8 @@
 package service.domain.queries;
 
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import service.domain.exceptions.CurrencyConverterApiUnavailableException;
 import service.domain.models.ConverterApiQueryDto;
 import service.infrastructure.annotations.Query;
 import service.infrastructure.configuration.properties.ApplicationConfiguration;
@@ -17,7 +19,12 @@ public class GetRateFromCurrencyConverterApiQuery {
 
     public ConverterApiQueryDto run() {
         String uri = applicationConfiguration.getUrls().getCurrencyConverterApi();
-       return restTemplate.getForEntity(uri, ConverterApiQueryDto.class)
-                .getBody();
+
+        try {
+            return restTemplate.getForEntity(uri, ConverterApiQueryDto.class)
+                    .getBody();
+        } catch(RestClientException e) {
+            throw new CurrencyConverterApiUnavailableException(uri, e);
+        }
     }
 }

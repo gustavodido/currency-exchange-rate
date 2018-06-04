@@ -7,7 +7,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import service.domain.exceptions.CurrencyConverterApiUnavailableException;
 import service.domain.models.ConverterApiQueryDto;
 import service.infrastructure.configuration.properties.ApplicationConfiguration;
 import service.infrastructure.configuration.properties.UrlsConfiguration;
@@ -45,4 +47,11 @@ public class GetRateFromCurrencyConverterApiQueryTest {
         assertThat(actualRate).isEqualTo(latestRateDto());
     }
 
+    @Test(expected = CurrencyConverterApiUnavailableException.class)
+    public void shouldHandleInternalExceptionToDomainException() {
+        when(restTemplate.getForEntity(anyString(), eq(ConverterApiQueryDto.class)))
+                .thenThrow(RestClientException.class);
+
+        getRateFromCurrencyConverterApiQuery.run();
+    }
 }
