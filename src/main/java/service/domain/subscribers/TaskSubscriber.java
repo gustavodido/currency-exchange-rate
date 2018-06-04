@@ -1,4 +1,4 @@
-package service.scheduling;
+package service.domain.subscribers;
 
 import java.time.Instant;
 
