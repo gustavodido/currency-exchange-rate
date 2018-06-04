@@ -23,7 +23,7 @@ public class GetRateFromCurrencyConverterApiQuery {
         try {
             return restTemplate.getForEntity(uri, ConverterApiQueryDto.class)
                     .getBody();
-        } catch(RestClientException e) {
+        } catch (RestClientException e) {
             throw new CurrencyConverterApiUnavailableException(uri, e);
         }
     }
