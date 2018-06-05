@@ -13,7 +13,7 @@ import service.domain.queries.GetLatestExchangeRateQuery;
 import java.time.Instant;
 
 import static service.controllers.ExchangeRateResource.embedAsResources;
-import static service.infrastructure.configuration.Constants.APPLICATION_HAL_JSON;
+import static service.infrastructure.configuration.StaticConstants.APPLICATION_HAL_JSON;
 
 @RestController
 @RequestMapping(value = "/api/rates", produces = APPLICATION_HAL_JSON)

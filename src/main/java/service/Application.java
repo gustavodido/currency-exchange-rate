@@ -6,7 +6,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 import static java.util.TimeZone.getTimeZone;
 import static java.util.TimeZone.setDefault;
-import static service.infrastructure.configuration.Constants.DEFAULT_TIMEZONE;
+import static service.infrastructure.configuration.StaticConstants.DEFAULT_TIMEZONE;
 
 @SpringBootApplication
 @EnableScheduling

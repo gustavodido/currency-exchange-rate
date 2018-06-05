@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static java.util.TimeZone.getTimeZone;
 import static java.util.TimeZone.setDefault;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
-import static service.infrastructure.configuration.Constants.DEFAULT_TIMEZONE;
+import static service.infrastructure.configuration.StaticConstants.DEFAULT_TIMEZONE;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
