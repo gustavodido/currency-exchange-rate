@@ -13,7 +13,7 @@ It will also run all unit and integration tests. Also you can start the Spring B
 `./gradlew bootRun`
 
 
-##### Tech Stack <a name="techstack" />
+##### Tech Stack 
 
 |Technology			| Objective				|
 |-------------------|-----------------------|
@@ -25,29 +25,30 @@ It will also run all unit and integration tests. Also you can start the Spring B
 |AssertJ			| Assertion library|
 |Spring Boot 		| Application framework |
 
----------
 
 #### Approach
 
-I have based the entire solution on two main goals: *testability* and *simplicity*.
+I have based the entire solution on two main goals: *code quality*, *testability* and *simplicity*.
 
-##### Testability <a name="testability" />
+##### Testability 
 
-All classes (except the infrastructure) are covered by unit testing. Also, there are two integration tests, one to test the RESTFul Api and another one to test the scheduled task workflow.
+All classes (except the infrastructure) are covered by unit testing. Also, there are two integration tests, one to test the RESTFul Api and another one to test the scheduled task workflow. 
 
-##### Simplicity <a name="simplicity" />
+##### Simplicity 
 
 In order to keep the solution as simple as possible:
 
 1. The database model is simple as possible. For example, the exchange rate timestamp is the primary key and the solution is using a simple in-memory H2 database.
-2. There is no logging or monitoring frameworks in palce.
+2. There is no logging or monitoring frameworks in place.
 3. The integration tests are running together with unit test. There is not another task/source set for them.
+4. There is not a circuit breaker implementation for the external api.
+5. Spring events have been used to show a little bit of reactive programming. It could be replaced by a message broker.
 
----------
+_If any of the items above are necessary, please let me know._
 
 #### Design
 
-##### RESTFul Api
+##### RESTful Api
 
 The service implementatino is very simple with HATEOAS support, it is just delegating the work to the domain queries. Also, there is a controller advice to handle business eceptions.
 
@@ -72,14 +73,15 @@ Therefore, I rather introduce the concept of commands and queries in my applicat
 
 Every command or query is a really small piece of business logic that can be individually tested, read and understood.
 
-_*It does not have the same goal as the CQRS pattern._
+_It does not have the same goal as the CQRS pattern._
 
 ##### Scheduling
 
-Spring is responsible for the shceduling mechanism of the task that will consistently get the latest exchange rate and save it to the in memory database. 
+Inside the _scheduling_ package there is the task that will consistently get the latest exchange rate. In order to show a little bit of reactive programming, the task is not calling the command to save the rate directly, it is triggering an event that will be listened by the command, simulating a loosely coupled Pub/Sub approach.
 
-In order to show a little bit of reactive programming, the task is not calling the command to save the rate directly, it is triggering an event that will be listened by the command. If the idea was to show something more complex, possibly a message broker like RabbitMQ, I am happy to introduce a docker container, bootstrap a RabbiMQ instance and use it in the solution.
+##### Configuration
 
+It is possible to configure the application in the _yml_ files with spring profiles.
 
 
 
