@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import service.domain.queries.GetRateFromCurrencyConverterApiQuery;
-import service.domain.scheduling.CheckNewExchangeRatesTask;
+import service.scheduling.CheckNewExchangeRatesTask;
 import service.infrastructure.providers.TimeProvider;
 import service.support.IntegrationTest;
 

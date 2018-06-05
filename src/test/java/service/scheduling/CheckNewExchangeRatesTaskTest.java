@@ -1,4 +1,4 @@
-package service.domain.scheduling;
+package service.scheduling;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

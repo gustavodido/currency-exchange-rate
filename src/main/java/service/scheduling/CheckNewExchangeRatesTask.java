@@ -1,4 +1,4 @@
-package service.domain.scheduling;
+package service.scheduling;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationEventPublisher;
