@@ -8,7 +8,7 @@ spring:
 
 application:
   scheduling:
-    enabled: false
+    enabled: true
     interval: 60000
   urls:
     currencyConverterApi: http://free.currencyconverterapi.com/api/v5/convert?q=EUR_USD&compact=y
