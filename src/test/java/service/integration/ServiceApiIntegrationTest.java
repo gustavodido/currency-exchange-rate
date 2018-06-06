@@ -12,7 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static service.support.Stubs.latestRate;
 import static service.support.Stubs.oldRate;
 
-public class ExchangeRateApiTest extends IntegrationTest {
+public class ServiceApiIntegrationTest extends IntegrationTest {
     @Test
     public void shouldGetExchangeRateByTimestamp() throws Exception {
         this.mockMvc.perform(get("/api/rates/" + oldRate().getTimestamp()))

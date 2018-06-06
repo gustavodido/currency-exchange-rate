@@ -12,7 +12,6 @@ It will also run all unit and integration tests. Also you can start the Spring B
 
 `./gradlew bootRun`
 
-
 ##### Tech Stack 
 
 |Technology			| Objective				|
@@ -41,7 +40,7 @@ In order to keep the solution as simple as possible:
 1. The database model is simple as possible. For example, the exchange rate timestamp is the primary key and the solution is using a simple in-memory H2 database.
 2. There is no logging or monitoring frameworks in place.
 3. The integration tests are running together with unit test. There is not another task/source set for them.
-4. There is not a circuit breaker implementation for the external api.
+4. There is not a circuit breaker implementation for the external api with a fallback strategy.
 5. Spring events have been used to show a little bit of reactive programming. It could be replaced by a message broker.
 
 _If any of the items above are necessary, please let me know._

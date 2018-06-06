@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static service.support.Stubs.newRate;
 import static service.support.Stubs.newRateDto;
 
-public class CheckNewExchangesRatesTest extends IntegrationTest {
+public class ScheduledTaskIntegrationTest extends IntegrationTest {
 
     @MockBean
     private TimeProvider timeProvider;
