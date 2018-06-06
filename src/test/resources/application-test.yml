@@ -4,4 +4,4 @@ spring:
 
 application:
   scheduling:
-    enabled: true
+    enabled: false
