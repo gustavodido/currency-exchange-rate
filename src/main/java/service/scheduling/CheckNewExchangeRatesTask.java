@@ -4,7 +4,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import service.domain.models.ConverterApiQueryDto;
+import service.domain.models.dtos.ConverterApiQueryDto;
 import service.domain.models.ExchangeRate;
 import service.domain.models.NewExchangeRateEvent;
 import service.domain.queries.GetRateFromCurrencyConverterApiQuery;

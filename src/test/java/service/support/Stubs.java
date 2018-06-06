@@ -1,8 +1,9 @@
 package service.support;
 
-import service.domain.models.ConverterApiQueryDto;
+import service.domain.models.dtos.ConverterApiQueryDto;
 import service.domain.models.ExchangeRate;
 import service.domain.models.NewExchangeRateEvent;
+import service.domain.models.dtos.FixerApiQueryDto;
 
 import java.util.List;
 
@@ -29,8 +30,14 @@ public class Stubs {
         return asList(oldRate(), latestRate());
     }
 
-    public static ConverterApiQueryDto latestRateDto() {
+    public static ConverterApiQueryDto latestConverterApiDto() {
         return ConverterApiQueryDto.builder()
+                .value(latestRate().getValue())
+                .build();
+    }
+
+    public static FixerApiQueryDto latestFixerApiDto() {
+        return FixerApiQueryDto.builder()
                 .value(latestRate().getValue())
                 .build();
     }

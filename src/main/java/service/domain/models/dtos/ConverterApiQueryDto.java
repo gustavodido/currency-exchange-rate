@@ -1,4 +1,4 @@
-package service.domain.models;
+package service.domain.models.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

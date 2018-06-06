@@ -10,19 +10,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import service.domain.exceptions.CurrencyConverterApiUnavailableException;
-import service.domain.models.dtos.ConverterApiQueryDto;
+import service.domain.models.dtos.FixerApiQueryDto;
 import service.infrastructure.configuration.ApplicationConfiguration;
-import service.infrastructure.configuration.ApplicationConfiguration.ProvidersConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpStatus.ACCEPTED;
-import static service.support.Stubs.latestConverterApiDto;
+import static service.support.Stubs.latestFixerApiDto;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GetRateFromCurrencyConverterApiQueryTest {
+public class GetRateFromFixerApiQueryTest {
     @Mock
     private RestTemplate restTemplate;
 
@@ -30,28 +29,28 @@ public class GetRateFromCurrencyConverterApiQueryTest {
     private ApplicationConfiguration applicationConfiguration;
 
     @InjectMocks
-    private GetRateFromCurrencyConverterApiQuery getRateFromCurrencyConverterApiQuery;
+    private GetRateFromFixerApiQuery getRateFromFixerApiQuery;
 
     @Before
     public void setUp() {
-        when(applicationConfiguration.getProviders()).thenReturn(new ProvidersConfiguration());
+        when(applicationConfiguration.getProviders()).thenReturn(new ApplicationConfiguration.ProvidersConfiguration());
     }
 
     @Test
     public void shouldGetExchangeRateFromApi() {
-        when(restTemplate.getForEntity(anyString(), eq(ConverterApiQueryDto.class)))
-                .thenReturn(new ResponseEntity<>(latestConverterApiDto(), ACCEPTED));
+        when(restTemplate.getForEntity(anyString(), eq(FixerApiQueryDto.class)))
+                .thenReturn(new ResponseEntity<>(latestFixerApiDto(), ACCEPTED));
 
-        ConverterApiQueryDto actualRate = getRateFromCurrencyConverterApiQuery.run();
+        FixerApiQueryDto actualRate = getRateFromFixerApiQuery.run();
 
-        assertThat(actualRate).isEqualTo(latestConverterApiDto());
+        assertThat(actualRate).isEqualTo(latestFixerApiDto());
     }
 
     @Test(expected = CurrencyConverterApiUnavailableException.class)
     public void shouldHandleInternalExceptionToDomainException() {
-        when(restTemplate.getForEntity(anyString(), eq(ConverterApiQueryDto.class)))
+        when(restTemplate.getForEntity(anyString(), eq(FixerApiQueryDto.class)))
                 .thenThrow(RestClientException.class);
 
-        getRateFromCurrencyConverterApiQuery.run();
+        getRateFromFixerApiQuery.run();
     }
 }

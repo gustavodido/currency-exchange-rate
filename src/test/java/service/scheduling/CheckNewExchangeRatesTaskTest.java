@@ -12,7 +12,7 @@ import service.infrastructure.providers.TimeProvider;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static service.support.Stubs.latestRate;
-import static service.support.Stubs.latestRateDto;
+import static service.support.Stubs.latestConverterApiDto;
 import static service.support.Stubs.latestRateNewEvent;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -31,7 +31,7 @@ public class CheckNewExchangeRatesTaskTest {
 
     @Test
     public void shouldPublishNewEventWithExchangeRate() {
-        when(getRateFromCurrencyConverterApiQuery.run()).thenReturn(latestRateDto());
+        when(getRateFromCurrencyConverterApiQuery.run()).thenReturn(latestConverterApiDto());
         when(timeProvider.now()).thenReturn(latestRate().getTimestamp());
 
         checkNewExchangeRatesTask.run();
