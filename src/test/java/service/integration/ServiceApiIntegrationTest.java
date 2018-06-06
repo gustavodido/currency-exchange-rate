@@ -33,7 +33,7 @@ public class ServiceApiIntegrationTest extends IntegrationTest {
 
     @Test
     public void shouldGetExchangeRatesByTimestampRange() throws Exception {
-        this.mockMvc.perform(get("/api/rates/history")
+        this.mockMvc.perform(get("/api/rates/historical")
                 .param("from", oldRate().getTimestamp().toString())
                 .param("to", latestRate().getTimestamp().toString()))
                 .andDo(print())

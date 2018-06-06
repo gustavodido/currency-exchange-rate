@@ -37,7 +37,7 @@ public class ExchangeRateController {
         return new ExchangeRateResource(getLatestExchangeRateQuery.run());
     }
 
-    @GetMapping("/history")
+    @GetMapping("/historical")
     public Resources<ExchangeRateResource> history(@RequestParam Instant from, @RequestParam Instant to) {
         return embedAsResources(getExchangeRatesByDateRangeQuery.run(from, to), from, to);
     }
