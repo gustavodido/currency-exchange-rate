@@ -2,6 +2,7 @@ package service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import static java.util.TimeZone.getTimeZone;
@@ -10,6 +11,7 @@ import static service.infrastructure.configuration.StaticConstants.DEFAULT_TIMEZ
 
 @SpringBootApplication
 @EnableScheduling
+@EnableCircuitBreaker
 public class Application {
 
     public static void main(String[] args) {

@@ -55,8 +55,14 @@ public class Stubs {
                 .build();
     }
 
-    public static ConverterApiQueryDto newRateDto() {
+    public static ConverterApiQueryDto newConverterApiDto() {
         return ConverterApiQueryDto.builder()
+                .value(newRate().getValue())
+                .build();
+    }
+
+    public static FixerApiQueryDto newFixerApiDto() {
+        return FixerApiQueryDto.builder()
                 .value(newRate().getValue())
                 .build();
     }
