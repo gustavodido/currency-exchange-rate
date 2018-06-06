@@ -31,6 +31,6 @@ class ExchangeRateResource extends ResourceSupport {
                 .collect(toList());
 
         return new Resources<>(resources, linkTo(methodOn(ExchangeRateController.class).history(from, to))
-                .withRel("history"));
+                .withRel("historical"));
     }
 }
