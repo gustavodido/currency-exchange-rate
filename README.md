@@ -1,6 +1,6 @@
 ## Currency exchange rate service
 
-#### Application
+### Application
 
 ##### Running 
 
@@ -8,52 +8,38 @@ Clone the repository, build the application:
 
 `./gradlew build`
 
-It will also run all unit and integration tests. Also you can start the Spring Boot application:
+It will also run all unit and integration tests. Finally, you can start the Spring Boot application:
 
 `./gradlew bootRun`
 
 ##### Tech Stack 
 
-|Technology			| Objective				|
-|-------------------|-----------------------|
-|Java 8				| Programming language	|
-|Gradle				| Build tool 			|
-|Lombok				| Library to reduce boiler plate code |
-|JUnit				| Testing library |
-|Mockito			| Mocking library |
-|AssertJ			| Assertion library|
-|Spring Boot 		| Application framework |
+Spring Boot 2 ecosystem, Gradle, Lombok, JUnit, Mockito, AssertJ, Hystrix and H2.
 
+### Approach
 
-#### Approach
+I have based the entire solution on three main goals: *code quality*, *testability* and *simplicity*.
 
-I have based the entire solution on two main goals: *code quality*, *testability* and *simplicity*.
-
-##### Testability 
-
-All classes (except the infrastructure) are covered by unit testing. Also, there are two integration tests, one to test the RESTFul Api and another one to test the scheduled task workflow. 
-
-##### Simplicity 
+All classes (except the infrastructure) are covered by unit testing. Also, there are two integration tests, one to test the RESTful Api and another one to test the scheduled task workflow including the circuit breaker. 
 
 In order to keep the solution as simple as possible:
 
-1. The database model is simple as possible. For example, the exchange rate timestamp is the primary key and the solution is using a simple in-memory H2 database.
+1. The database model and implementation are really simple. It is a H2 in-memory database with a table using the generation timestamp as primary key.
 2. There is no logging or monitoring frameworks in place.
 3. The integration tests are running together with unit test. There is not another task/source set for them.
-4. There is not a circuit breaker implementation for the external api with a fallback strategy.
-5. Spring events have been used to show a little bit of reactive programming. It could be replaced by a message broker.
+4. Spring events have been used to show a little bit of reactive programming. It could be replaced by a message broker.
 
 _If any of the items above are necessary, please let me know._
 
-#### Design
+### Design
 
 ##### RESTful Api
 
-The service implementatino is very simple with HATEOAS support, it is just delegating the work to the domain queries. Also, there is a controller advice to handle business eceptions.
+The service implementation is very simple with HATEOAS support, it is just delegating the work to the domain queries. Also, there is a controller advice to handle business exceptions.
 
 ##### Domain
 
-Inside the domain package thera are all business logic related to the application itself.
+Inside the domain package there are all business logic related to the application itself.
 
 ###### Command & Query Object Pattern 
 
@@ -61,7 +47,7 @@ The very first thing to notice is that I am not using the traditional Service-Re
 
 1. Repositories with business logic.
 3. Services without business logic, just with wrappers methods for repositories.
-4. Services with hundred (if not thousand) of lines of code.
+4. Services with hundreds (if not thousands) of lines of code.
 5. Business logic duplication between services.
 6. Poor testability and complex dependency graph.
 
@@ -76,7 +62,13 @@ _It does not have the same goal as the CQRS pattern._
 
 ##### Scheduling
 
-Inside the _scheduling_ package there is the task that will consistently get the latest exchange rate. In order to show a little bit of reactive programming, the task is not calling the command to save the rate directly, it is triggering an event that will be listened by the command, simulating a loosely coupled Pub/Sub approach.
+Inside the _scheduling_ package there is the task that will consistently get the latest exchange rate. In order to show a little bit of reactive programming, the task is not calling the command to save the new exchange rate directly, it is triggering an event that will be listened by the command, simulating a loosely coupled Pub/Sub approach.
+
+Also, there is a _wrapper_ class just to allow the scheduling to be disabled during the integration tests.
+
+##### Circuit Breaker
+
+Inside the task that is checking for new exchange rates, there is a circuit breaker implementation using _Hystrix_. Basically, we have two exchange rate providers configured and the second one will be used if the first is not working correctly.
 
 ##### Configuration
 
