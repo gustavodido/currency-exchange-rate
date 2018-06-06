@@ -4,13 +4,17 @@
 
 ##### Running 
 
-Clone the repository, build the application:
+Clone the repository and build the application:
 
 `./gradlew build`
+or
+`mvn package`
 
 It will also run all unit and integration tests. Finally, you can start the Spring Boot application:
 
 `./gradlew bootRun`
+or
+`mvn spring-boot:run`
 
 ##### Tech Stack 
 
