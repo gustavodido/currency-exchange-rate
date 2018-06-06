@@ -10,5 +10,6 @@ application:
   scheduling:
     enabled: true
     interval: 60000
-  urls:
+  providers:
     currencyConverterApi: http://free.currencyconverterapi.com/api/v5/convert?q=EUR_USD&compact=y
+    fixerApi: http://data.fixer.io/api/latest?access_key=d3caff06bccd25fc41a6ad2216d6038f&base=EUR&symbols=USD

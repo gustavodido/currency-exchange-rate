@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import service.domain.exceptions.CurrencyConverterApiUnavailableException;
 import service.domain.models.ConverterApiQueryDto;
 import service.infrastructure.configuration.ApplicationConfiguration;
-import service.infrastructure.configuration.ApplicationConfiguration.UrlsConfiguration;
+import service.infrastructure.configuration.ApplicationConfiguration.ProvidersConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -34,7 +34,7 @@ public class GetRateFromCurrencyConverterApiQueryTest {
 
     @Before
     public void setUp() {
-        when(applicationConfiguration.getUrls()).thenReturn(new UrlsConfiguration());
+        when(applicationConfiguration.getProviders()).thenReturn(new ProvidersConfiguration());
     }
 
     @Test

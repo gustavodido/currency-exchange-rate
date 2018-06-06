@@ -14,15 +14,16 @@ import org.springframework.context.annotation.Configuration;
 @Data
 public class ApplicationConfiguration {
     @NestedConfigurationProperty
-    private final UrlsConfiguration urls = new UrlsConfiguration();
+    private final ProvidersConfiguration providers = new ProvidersConfiguration();
     @NestedConfigurationProperty
     private final SchedulingConfiguration scheduling = new SchedulingConfiguration();
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class UrlsConfiguration {
+    public static class ProvidersConfiguration {
         private String currencyConverterApi = "";
+        private String fixerApi = "";
     }
 
     @Data

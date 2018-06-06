@@ -18,7 +18,7 @@ public class GetRateFromCurrencyConverterApiQuery {
     }
 
     public ConverterApiQueryDto run() {
-        String uri = applicationConfiguration.getUrls().getCurrencyConverterApi();
+        String uri = applicationConfiguration.getProviders().getCurrencyConverterApi();
 
         try {
             return restTemplate.getForEntity(uri, ConverterApiQueryDto.class)
